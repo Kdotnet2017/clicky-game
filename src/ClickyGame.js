@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import Wrapper from "./components/Wrapper";
 import Image from "./components/Image"
-import './ClickyGame.css';
+import "./ClickyGame.css";
 import images from "./images.json";
 
 class ClickyGame extends Component {
@@ -16,11 +16,9 @@ class ClickyGame extends Component {
 
   handleImageChange = id => {
     var imageClickedId = this.state.imageClickedId;
-    console.log(imageClickedId);
     // check to see if it's first time or not
     if (!imageClickedId.includes(id)) {
       imageClickedId.push(id)
-      console.log(id);
       // if all images in json displayed
       if (imageClickedId.length === 12) {
         this.setState({ score: 12, totalScore: 12, imageClickedId: [] });
@@ -33,18 +31,15 @@ class ClickyGame extends Component {
       this.setState({ images, imageClickedId, score: imageClickedId.length, totalScore: this.state.topScore });
       // random generating image for all images
       for (var i = images.length - 1; i > 0; i--) {
-        console.log("i:" + i);
         var j = Math.floor((Math.random() * (i)) + 0);
-        console.log("j:" + j);
         [images[j], images[i]] = [images[i], images[j]];
       }
-      
+
     } else {
       //lost game over
       if (this.state.score < this.state.totalScore) {
         this.state.topScore = this.state.totalScore;
       }
-      console.log(id);
       this.setState({ imageClickedId: [], score: 0, totalScore: this.state.topScore });
       return;
     }
@@ -70,6 +65,7 @@ class ClickyGame extends Component {
           ))}
         </Wrapper>
         <hr></hr>
+        <p>Click on an image to earn points, but don't click on any more than once!</p>
       </div>
     );
   }
